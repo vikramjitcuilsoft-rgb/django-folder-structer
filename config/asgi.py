@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 env = os.getenv("DJANGO_ENV", "local")
+print(f"🔧 Loading Django settings: config.settings.{env}")
 
 os.environ.setdefault(
     "DJANGO_SETTINGS_MODULE",

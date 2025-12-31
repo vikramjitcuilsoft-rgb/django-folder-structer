@@ -5,8 +5,7 @@ def log_database_info():
 
     engine = db.get("ENGINE")
     name = db.get("NAME")
-    host = db.get("HOST", "local")
 
     print(
-        f"🟢 CONNECTED DATABASE → ENGINE={engine}, NAME={name}, HOST={host}"
+        f"🟢 CONNECTED DATABASE → ENGINE={engine}"
     )
