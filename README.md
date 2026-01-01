@@ -27,8 +27,6 @@ django-best-structer/
 │       └── production.py    # Production settings (PostgreSQL)
 ├── apps/
 │   ├── users/
-│   ├── payments/
-│   └── notifications/
 ├── templates/
 ├── static/
 ├── staticfiles/
