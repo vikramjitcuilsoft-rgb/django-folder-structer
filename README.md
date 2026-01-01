@@ -18,7 +18,8 @@ django-best-structer/
 ├── .env.example
 ├── requirements.txt
 ├── config/
-│   ├── wsgi.py              # WSGI entry (production)
+│   ├── asgi.py  # ASGI entry (production)
+|   ├── wsgi.py                 
 │   ├── urls.py
 │   └── settings/
 │       ├── base.py
@@ -66,4 +67,4 @@ python manage.py migrate
 python manage.py collectstatic
 
 # Start WSGI server using gunicorn
-gunicorn config.wsgi:application --bind 0.0.0.0:9000# django-folder-structer
+uvicorn config.asgi:application --bind 0.0.0.0:9000# django-folder-structer
