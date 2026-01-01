@@ -66,5 +66,5 @@ python manage.py migrate
 # Collect static files
 python manage.py collectstatic
 
-# Start WSGI server using gunicorn
+# Start ASGI server using uvicorn
 uvicorn config.asgi:application --bind 0.0.0.0:9000# django-folder-structer
