@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django import forms
+from django.contrib.auth.decorators import login_required
 
 
 # ----------------------------
@@ -22,7 +23,7 @@ class UserForm(forms.ModelForm):
 # ----------------------------
 # HOME
 # ----------------------------
-
+@login_required
 def home(request):
     return redirect('user_list')
 
@@ -64,7 +65,11 @@ def user_create(request):
 # ----------------------------
 # UPDATE USER
 # ----------------------------
+@login_required
 def user_update(request, id):
+    print("User:", request.user)
+    print("Is Authenticated:", request.user.is_authenticated)
+    print("Session Key:", request.session.session_key)
     user = get_object_or_404(User, id=id)
 
     if request.method == 'POST':
@@ -86,10 +91,10 @@ def user_update(request, id):
         'user': user
     })
 
-
 # ----------------------------
 # DELETE USER
 # ----------------------------
+@login_required
 def user_delete(request, id):
     user = get_object_or_404(User, id=id)
 

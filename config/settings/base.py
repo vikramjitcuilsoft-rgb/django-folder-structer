@@ -1,14 +1,26 @@
 from pathlib import Path
 
+# --------------------------------------------------
+# BASE DIRECTORY (FIXED)
+# --------------------------------------------------
+# File location: config/settings/base.py
+# This correctly points to project root (same level as manage.py)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 
 # --------------------------------------------------
 # SECURITY (base defaults)
 # --------------------------------------------------
 SECRET_KEY = 'django-insecure-change-this-in-production'
 
+DEBUG = True
+
 ALLOWED_HOSTS = ["*"]
 
+
+# --------------------------------------------------
+# CHANNELS / REDIS
+# --------------------------------------------------
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -23,17 +35,18 @@ CHANNEL_LAYERS = {
 # APPLICATIONS
 # --------------------------------------------------
 INSTALLED_APPS = [
-    'apps',
-    'channels',
-    'config',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'channels',
+
     'apps.users.apps.UsersConfig',
 ]
+
 
 # --------------------------------------------------
 # MIDDLEWARE
@@ -48,21 +61,24 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 # --------------------------------------------------
 # URL / SERVER
 # --------------------------------------------------
 ROOT_URLCONF = 'config.urls'
 
 WSGI_APPLICATION = 'config.wsgi.application'
-ASGI_APPLICATION = "config.asgi.application"
+ASGI_APPLICATION = 'config.asgi.application'
+
 
 # --------------------------------------------------
-# TEMPLATES
+# TEMPLATES (FIXED)
 # --------------------------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # ✅ REQUIRED for login.html
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +91,15 @@ TEMPLATES = [
     },
 ]
 
+
+# --------------------------------------------------
+# AUTH SETTINGS
+# --------------------------------------------------
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+
+
 # --------------------------------------------------
 # STATIC & MEDIA
 # --------------------------------------------------
@@ -85,13 +110,15 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
 # --------------------------------------------------
-# INTERNATIONALIZATION (RECOMMENDED)
+# INTERNATIONALIZATION
 # --------------------------------------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+
 
 # --------------------------------------------------
 # DEFAULT PRIMARY KEY
