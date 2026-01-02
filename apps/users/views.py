@@ -67,9 +67,7 @@ def user_create(request):
 # ----------------------------
 @login_required
 def user_update(request, id):
-    print("User:", request.user)
-    print("Is Authenticated:", request.user.is_authenticated)
-    print("Session Key:", request.session.session_key)
+
     user = get_object_or_404(User, id=id)
 
     if request.method == 'POST':

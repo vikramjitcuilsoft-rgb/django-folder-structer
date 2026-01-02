@@ -1,17 +1,16 @@
 from pathlib import Path
+import os
 
 # --------------------------------------------------
 # BASE DIRECTORY (FIXED)
 # --------------------------------------------------
-# File location: config/settings/base.py
-# This correctly points to project root (same level as manage.py)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # --------------------------------------------------
 # SECURITY (base defaults)
 # --------------------------------------------------
-SECRET_KEY = 'django-insecure-change-this-in-production'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -41,9 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'channels',
-
     'apps.users.apps.UsersConfig',
 ]
 
